@@ -7,7 +7,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import type { Content, TMDBResponse } from '@/types/tmdb'
+import type { Content, ContentResponse } from '@/types/tmdb'
 import Carousel from '@/components/Carousel.vue'
 
 const movies = ref<Content[]>([])
@@ -16,15 +16,16 @@ const series = ref<Content[]>([])
 onMounted(async () => {
   const { $tmdb } = useNuxtApp();
   try {
-    const movieRes = await $tmdb.get<TMDBResponse>('/movie/popular')
+    const movieRes = await $tmdb.get<ContentResponse>('/movie/popular')
     movies.value = movieRes.data.results
 
-    const seriesRes = await $tmdb.get<TMDBResponse>('/tv/popular')
+    const seriesRes = await $tmdb.get<ContentResponse>('/tv/popular')
     series.value = seriesRes.data.results
     
     console.log('movieRes ::: ', movieRes.data.results)
+    console.log('seriesRes ::: ', seriesRes.data.results)
   } catch (error) {
-    console.error(error)
+    console.error('Popular top 20 error : ', error)
   }
 })
 </script>

@@ -7,7 +7,7 @@
       </button>
       <div class="carousel" ref="carouselRef">
         <ul>
-          <li v-for="(item, index) in contents" :key="item.id">
+          <li v-for="(item, index) in contents" :key="item.id" @click="goToDetail(item)">
             <img :src="`https://image.tmdb.org/t/p/w300${item.posterPath}`" :alt="item.title || item.name" />
             <p>{{ index+1 }}위 / {{ item.title || item.name }}</p>
           </li>
@@ -22,6 +22,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router';
 import type { Content } from '@/types/tmdb'
 
 defineProps<{
@@ -30,6 +31,7 @@ defineProps<{
 }>()
 
 const carouselRef = ref<HTMLDivElement | null>(null)
+const router = useRouter()
 
 // 현재 스크롤 위치
 const isLeftDisabled = ref(true)
@@ -67,6 +69,10 @@ const scrollRight = () => {
     })
   }
 }
+
+const goToDetail = (item: Content) => {
+  router.push(`/contents/${item.id}`)
+}
 </script>
 
 <style scoped>
@@ -77,6 +83,7 @@ const scrollRight = () => {
 .carousel {
   display: flex;
   overflow-x: scroll;
+  cursor: pointer;
 }
 .carousel ul {
   display: flex;
