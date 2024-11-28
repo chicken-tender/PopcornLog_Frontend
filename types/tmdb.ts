@@ -15,6 +15,7 @@ export interface Detail extends Content {
     name: string
   }>
   originalTitle: string
+  originalName: string
   overview: string
   releaseDate: string
   runtime: number
@@ -24,4 +25,8 @@ export interface Detail extends Content {
 
 export interface ContentResponse {
   results: Content[]
+}
+
+export interface SimilarResponse {
+  results: Detail[]
 }

@@ -6,6 +6,8 @@
           class="navbar__logo"
           src="@/public/images/logo.png"
           alt="로고 이미지"
+          @click="goToHome"
+          style="cursor: pointer"
         />
         <ul class="navbar__menu">
           <li>홈</li>
@@ -29,6 +31,14 @@
   </header>
 </template>
 
+<script setup lang="ts">
+import { useRouter } from "vue-router"
+
+const router = useRouter()
+const goToHome = () => {
+  router.push('/')
+}
+</script>
 <style scoped>
 li {
   list-style: none;

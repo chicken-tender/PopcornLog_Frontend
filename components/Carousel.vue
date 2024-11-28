@@ -7,9 +7,9 @@
       </button>
       <div class="carousel" ref="carouselRef">
         <ul>
-          <li v-for="(item, index) in contents" :key="item.id" @click="goToDetail(item)">
-            <img :src="`https://image.tmdb.org/t/p/w300${item.posterPath}`" :alt="item.title || item.name" />
-            <p>{{ index+1 }}위 / {{ item.title || item.name }}</p>
+          <li v-for="item in contents" :key="item.id" @click="goToDetail(item)">
+            <img :style="{ width: props.imgWidth ? `${props.imgWidth}px` : '300px' }" :src="item.posterPath ? `https://image.tmdb.org/t/p/w300${item.posterPath}` : '/images/default_poster.png'" :alt="item.title || item.name" />
+            <p :style="{ fontSize: props.imgWidth ? '12px' : ''}">{{ item.title || item.name }}</p>
           </li>
         </ul>
       </div>
@@ -25,9 +25,11 @@ import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router';
 import type { Content } from '@/types/tmdb'
 
-defineProps<{
+const props = defineProps<{
   title: string
   contents: Content[]
+  type: string
+  imgWidth?: number
 }>()
 
 const carouselRef = ref<HTMLDivElement | null>(null)
@@ -71,7 +73,7 @@ const scrollRight = () => {
 }
 
 const goToDetail = (item: Content) => {
-  router.push(`/contents/${item.id}`)
+  router.push(`/contents/${item.id}?type=${props.type}`)
 }
 </script>
 

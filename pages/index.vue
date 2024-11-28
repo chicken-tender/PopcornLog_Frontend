@@ -1,7 +1,7 @@
 <template>
   <div>
-    <Carousel :title="'영화 TOP 20'" :contents="movies" />
-    <Carousel :title="'시리즈 TOP 20'" :contents="series" />
+    <Carousel :title="'영화 TOP 20'" :contents="movies" :type="'m'" />
+    <Carousel :title="'시리즈 TOP 20'" :contents="series" :type="'s'" />
   </div>
 </template>
 
