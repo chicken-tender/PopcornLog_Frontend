@@ -16,8 +16,10 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     apiKey: process.env.TMDB_API_KEY,
+    apiBaseUrl: process.env.API_BASE_URL,
     public: {
-      apiKey: process.env.TMDB_API_KEY
+      apiKey: process.env.TMDB_API_KEY,
+      apiBaseUrl: process.env.API_BASE_URL,
     }
   },
 

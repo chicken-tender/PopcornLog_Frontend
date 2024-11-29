@@ -22,8 +22,8 @@ onMounted(async () => {
     const seriesRes = await $tmdb.get<ContentResponse>('/tv/popular')
     series.value = seriesRes.data.results
     
-    console.log('movieRes ::: ', movieRes.data.results)
-    console.log('seriesRes ::: ', seriesRes.data.results)
+    // console.log('movieRes ::: ', movieRes.data.results)
+    // console.log('seriesRes ::: ', seriesRes.data.results)
   } catch (error) {
     console.error('Popular top 20 error : ', error)
   }

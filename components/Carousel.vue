@@ -8,7 +8,10 @@
       <div class="carousel" ref="carouselRef">
         <ul>
           <li v-for="item in contents" :key="item.id" @click="goToDetail(item)">
-            <img :style="{ width: props.imgWidth ? `${props.imgWidth}px` : '300px' }" :src="item.posterPath ? `https://image.tmdb.org/t/p/w300${item.posterPath}` : '/images/default_poster.png'" :alt="item.title || item.name" />
+            <img 
+              :style="{ width: props.imgWidth ? `${props.imgWidth}px` : '250px' }" 
+              :src="item.posterPath ? `https://image.tmdb.org/t/p/w300${item.posterPath}` : '/images/default_poster.png'" 
+              :alt="item.title || item.name" />
             <p :style="{ fontSize: props.imgWidth ? '12px' : ''}">{{ item.title || item.name }}</p>
           </li>
         </ul>
