@@ -21,7 +21,7 @@
           <input type="text" placeholder="제목, 출연진을 검색해보세요" />
         </div>
         <li class="user">
-          <el-button link>로그인</el-button>
+          <el-button link @click="openLoginModal">로그인</el-button>
         </li>
         <li class="alarm">
           <el-button plain>회원가입</el-button>
@@ -29,14 +29,24 @@
       </ul>
     </nav>
   </header>
+
+  <LoginModal :isLoginVisible="isLoginVisible" />
 </template>
 
 <script setup lang="ts">
 import { useRouter } from "vue-router"
+import LoginModal from "~/components/LoginModal.vue"
 
 const router = useRouter()
 const goToHome = () => {
   router.push('/')
+}
+
+const isLoginVisible = ref(false)
+const openLoginModal = () => {
+  console.log('openLoginModal before ::: ', isLoginVisible.value)
+  isLoginVisible.value = true
+  console.log('openLoginModal after ::: ', isLoginVisible.value)
 }
 </script>
 <style scoped>

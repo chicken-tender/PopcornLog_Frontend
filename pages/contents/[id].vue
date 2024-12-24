@@ -23,8 +23,8 @@
         </el-tag>
       </div>
     </div>
-    <div class="comment__container">
-      <h1>코멘트</h1>
+    <div class="rate__container">
+      <RateCard :rates="rate?.data || []" />
     </div>
     <div class="similar__container">
       <Carousel :title="'비슷한 작품'" :contents="similar" :type="type" :img-width="150" />
@@ -38,6 +38,7 @@ import { useRoute } from "vue-router"
 import type { Content, Detail, ContentResponse } from "@/types/tmdb"
 import type { Rate, RateParams } from "@/types/rate"
 import Carousel from '@/components/Carousel.vue'
+import RateCard from '@/components/RateCard.vue'
 
 const info = ref<Detail | undefined>(undefined)
 const similar = ref<Content[]>([])
@@ -60,7 +61,7 @@ const { $tmdb, $axios } = useNuxtApp()
 const getRateList = async (params: RateParams) => {
   try {
     const response = await $axios.post('/rates/inqRatesByContentId', params)
-    rate.value = response.data.extraData.result
+    rate.value = { data: response.data?.extraData?.result || [] }
     console.log('콘텐츠 리뷰 ::: ', rate.value)
   } catch (error) {
     console.error(error)
@@ -114,6 +115,12 @@ onMounted(async () => {
 
 .similar__container {
   margin-bottom: 30px;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.rate__container {
   padding: 20px;
   border-radius: 8px;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
